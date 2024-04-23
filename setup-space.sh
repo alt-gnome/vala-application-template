@@ -29,15 +29,6 @@ APP_COMMAND="$(echo "$APP_NAMESPACE" | sed 's/\(.\)\([A-Z]\)/\1-\2/g' | tr '[:up
 APP_COMMAND_C_NAME="$(echo $APP_COMMAND | sed 's/-/_/g')"
 DEVELOPER_NAME="${elems[-2]}"
 
-# echo $APP_ID
-# echo $RESOURCES_PATH
-# echo $RESOURCES_PATH_ESCAPED
-# echo $APP_NAME
-# echo $APP_COMMAND
-# echo $APP_COMMAND_C_NAME
-# echo $DEVELOPER_NAME
-# echo $APP_NAMESPACE
-
 find ./ -type f -exec sed -i "s/<<APP-ID>>/$APP_ID/g" {} +
 find ./ -type f -exec sed -i "s/<<RESOURCES-PATH>>/$RESOURCES_PATH_ESCAPED/g" {} +
 find ./ -type f -exec sed -i "s/<<APP-NAME>>/$APP_NAME/g" {} +
