@@ -1,11 +1,11 @@
-# Vala template repo
+# Шаблон приложения на языке Vala
 
-### Don't clone the repo!
-Just download repo as archive and run setup-space script. Or use as template while creating a new repo
+### Не клонируйте репозиторий!
+Просто загрузите его как архив или используйте как шаблон при создании новы репозиториев.
 
 ```
 cd vala-application-template
 sh setup-space.sh io.github.SuperDev.ExampleApp
 ```
 
-[Guide how to correctly select the application ID](https://developer.gnome.org/documentation/tutorials/application-id.html)
+[Как как правильно выбрать ID своего приложения](https://developer.gnome.org/documentation/tutorials/application-id.html)
