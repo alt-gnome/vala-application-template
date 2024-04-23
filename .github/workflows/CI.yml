@@ -1,0 +1,43 @@
+name: CI Pull Request
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-latest
+
+    container:
+      image: valalang/lint
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Lint
+      run: io.elementary.vala-lint -d .
+
+  test-build:
+    name: Test Build
+    runs-on: ubuntu-latest
+    needs: lint
+
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-46
+      options: --privileged
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run tests and lint
+      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: <<APP-COMMAND>>.flatpak
+        manifest-path: build-aux/flatpak/<<APP-ID>>-Devel.json
+        run-tests: true
+        cache-key: flatpak-builder-${{ github.sha }}
