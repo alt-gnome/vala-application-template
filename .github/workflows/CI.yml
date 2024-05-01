@@ -6,6 +6,9 @@ on:
       - 'main'
   pull_request:
 
+env:
+  APP_ID: com.example.SuperDev2007.SomeApp
+
 jobs:
   lint:
     name: Lint Check
@@ -34,10 +37,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Replace patterns
+      run: sh setup-space.sh ${{ env.APP_ID }}
+
     - name: Run tests and lint
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
-        bundle: <<APP-COMMAND>>.flatpak
-        manifest-path: build-aux/flatpak/<<APP-ID>>-Devel.json
+        bundle: ${{ env.APP_ID }}.flatpak
+        manifest-path: build-aux/flatpak/${{ env.APP_ID }}-Devel.json
         run-tests: true
         cache-key: flatpak-builder-${{ github.sha }}
