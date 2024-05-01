@@ -20,8 +20,8 @@
 public class <<APP-NAMESPACE>>.MainWindow : Adw.ApplicationWindow {
 
     const ActionEntry[] ACTION_ENTRIES = {
-        { "preferences", on_preferences_activate },
-        { "about", on_about_activate },
+        { "preferences", on_preferences_action },
+        { "about", on_about_action },
     };
 
     public MainWindow (<<APP-NAMESPACE>>.Application app) {
