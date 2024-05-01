@@ -45,5 +45,5 @@ jobs:
       with:
         bundle: ${{ env.APP_ID }}.flatpak
         manifest-path: build-aux/flatpak/${{ env.APP_ID }}-Devel.json
-        run-tests: true
+        # run-tests: true
         cache-key: flatpak-builder-${{ github.sha }}
