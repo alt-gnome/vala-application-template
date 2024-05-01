@@ -18,6 +18,10 @@
 
 public class <<APP-NAMESPACE>>.Application : Adw.Application {
 
+    const ActionEntry[] ACTION_ENTRIES = {
+        { "quit", quit },
+    };
+
     public Application () {
         Object (
             application_id: Config.APP_ID_DYN,
@@ -26,12 +30,7 @@ public class <<APP-NAMESPACE>>.Application : Adw.Application {
     }
 
     construct {
-        ActionEntry[] action_entries = {
-            { "about", on_about_action },
-            { "preferences", on_preferences_action },
-            { "quit", quit }
-        };
-        add_action_entries (action_entries, this);
+        add_action_entries (ACTION_ENTRIES, this);
         set_accels_for_action ("app.quit", { "<primary>q" });
     }
 
@@ -46,25 +45,5 @@ public class <<APP-NAMESPACE>>.Application : Adw.Application {
         } else {
             active_window.present ();
         }
-    }
-
-    void on_preferences_action () {
-        message ("Hello, stranger…");
-    }
-
-    void on_about_action () {
-        var about = new Adw.AboutDialog () {
-            application_name = "<<APP-NAME>>",
-            application_icon = Config.APP_ID_DYN,
-            developer_name = "<<DEVELOPER-NAME>>",
-            version = Config.VERSION,
-            // Translators: NAME <EMAIL.COM> /n NAME <EMAIL.COM>
-            translator_credits = _("translator-credits"),
-            license_type = Gtk.License.GPL_3_0,
-            copyright = "© 2024 <<DEVELOPER-NAME>>",
-            release_notes_version = Config.VERSION
-        };
-
-        about.present (active_window);
     }
 }
