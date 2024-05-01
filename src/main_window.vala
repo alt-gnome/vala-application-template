@@ -55,6 +55,6 @@ public class <<APP-NAMESPACE>>.MainWindow : Adw.ApplicationWindow {
             release_notes_version = Config.VERSION
         };
 
-        about.present (active_window);
+        about.present (this);
     }
 }
