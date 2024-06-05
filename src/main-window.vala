@@ -15,9 +15,8 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-
-[GtkTemplate (ui = "<<RESOURCES-PATH>>ui/main_window.ui")]
-public class <<APP-NAMESPACE>>.MainWindow : Adw.ApplicationWindow {
+[GtkTemplate (ui = "<<RESOURCES-PATH>>ui/main-window.ui")]
+public sealed class <<APP-NAMESPACE>>.MainWindow: Adw.ApplicationWindow {
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "preferences", on_preferences_action },

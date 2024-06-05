@@ -15,8 +15,7 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
-
-public class <<APP-NAMESPACE>>.Application : Adw.Application {
+public sealed class <<APP-NAMESPACE>>.Application: Adw.Application {
 
     const ActionEntry[] ACTION_ENTRIES = {
         { "quit", quit },
