@@ -9,7 +9,7 @@ vapi_sources = files(
 ] + files(
   'main.vala',
   'application.vala',
-  'main_window.vala',
+  'main-window.vala',
 )
 
 <<APP-COMMAND-C-NAME>>_vala_args = [
