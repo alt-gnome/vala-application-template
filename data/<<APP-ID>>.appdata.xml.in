@@ -30,7 +30,8 @@
   <url type="homepage"></url>
   <url type="bugtracker"></url>
   <url type="help"></url>
-  <developer_name>
-    <<DEVELOPER-NAME>>
-  </developer_name>
+  <developer id="<<DEVELOPER-ID>>">
+    <name><<DEVELOPER-NAME>></name>
+  </developer>
 </component>
+

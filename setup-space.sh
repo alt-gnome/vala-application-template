@@ -2,8 +2,9 @@
 
 HELP="
 Using:
-    $ sh setup-space.sh [APP-ID]
+    $ sh setup-space.sh [APP-ID] [DEVELOPER-NAME]
 
+Uses developer username as developer name if name is empty.
 You can write \"--help\" or \"-h\" to show this message.
 "
 
@@ -27,13 +28,22 @@ APP_NAMESPACE="${elems[-1]}"
 APP_NAME=$(echo "$APP_NAMESPACE" | sed 's/\([a-z]\)\([A-Z]\)/\1 \2/g')
 APP_COMMAND="$(echo "$APP_NAMESPACE" | sed 's/\(.\)\([A-Z]\)/\1-\2/g' | tr '[:upper:]' '[:lower:]')"
 APP_COMMAND_C_NAME="$(echo $APP_COMMAND | sed 's/-/_/g')"
-DEVELOPER_NAME="${elems[-2]}"
+DEVELOPER_ID="${elems[0]}.${elems[1]}.${elems[2]}"
+DEVELOPER_USERNAME="${elems[-2]}"
+
+if [ $# -eq 2 ]; then
+    DEVELOPER_NAME="$2"
+else
+	DEVELOPER_NAME="$DEVELOPER_USERNAME"
+fi
 
 find ./ -type f -exec sed -i "s/<<APP-ID>>/$APP_ID/g" {} +
 find ./ -type f -exec sed -i "s/<<RESOURCES-PATH>>/$RESOURCES_PATH_ESCAPED/g" {} +
 find ./ -type f -exec sed -i "s/<<APP-NAME>>/$APP_NAME/g" {} +
 find ./ -type f -exec sed -i "s/<<APP-COMMAND>>/$APP_COMMAND/g" {} +
 find ./ -type f -exec sed -i "s/<<APP-COMMAND-C-NAME>>/$APP_COMMAND_C_NAME/g" {} +
+find ./ -type f -exec sed -i "s/<<DEVELOPER-USERNAME>>/$DEVELOPER_USERNAME/g" {} +
+find ./ -type f -exec sed -i "s/<<DEVELOPER-ID>>/$DEVELOPER_ID/g" {} +
 find ./ -type f -exec sed -i "s/<<DEVELOPER-NAME>>/$DEVELOPER_NAME/g" {} +
 find ./ -type f -exec sed -i "s/<<APP-NAMESPACE>>/$APP_NAMESPACE/g" {} +
 
