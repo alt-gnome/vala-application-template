@@ -3,6 +3,6 @@
   <gresource prefix="<<RESOURCES-PATH>>">
     <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.ui</file>
     <file>style.css</file>
-    <file preprocess="xml-stripblanks">ui/main-window.ui</file>
+    <file preprocess="xml-stripblanks">ui/window.ui</file>
   </gresource>
 </gresources>

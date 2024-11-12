@@ -2,7 +2,7 @@ project(
   '<<APP-COMMAND>>',
   ['c', 'vala'],
   version: '0.1.0',
-  meson_version: '>= 0.62.0',
+  meson_version: '>= 1.0.0',
   license: 'GPL-3.0-or-later',
 )
 
@@ -12,11 +12,27 @@ gnome = import('gnome')
 gtk = dependency('gtk4', version: '>= 4.16')
 libadwaita = dependency('libadwaita-1', version: '>= 1.6')
 
+dependencies = [
+  gtk,
+  libadwaita
+]
+
+add_project_arguments(
+  '-include', 'config.h',
+  language: ['c']
+)
+
+add_project_arguments(
+  '--target-glib', '2.76',
+  '--vapidir', meson.current_source_dir(),
+  language: ['vala']
+)
+
 app_id = '<<APP-ID>>'
 
 if get_option('is_devel')
-  name_postfix = ' (Dev ver.)'
-  app_id_dyn = '@0@-Devel'.format(app_id)
+  name_postfix = ' (Development)'
+  app_id_dyn = app_id + '-Devel'
 else
   name_postfix = ''
   app_id_dyn = app_id
@@ -26,27 +42,18 @@ conf = configuration_data()
 conf.set_quoted('APP_ID', app_id)
 conf.set_quoted('APP_ID_DYN', app_id_dyn)
 conf.set_quoted('G_LOG_DOMAIN', app_id)
-conf.set_quoted('PACKAGE_NAME', meson.project_name())
-conf.set_quoted('PACKAGE_VERSION', meson.project_version())
 conf.set10('IS_DEVEL', get_option('is_devel'))
 conf.set_quoted('VERSION', meson.project_version())
 conf.set_quoted('GETTEXT_PACKAGE', meson.project_name())
-conf.set_quoted('DATADIR', join_paths(get_option('prefix'), get_option('datadir')))
-conf.set_quoted('GNOMELOCALEDIR', join_paths(get_option('prefix'), get_option('localedir')))
-
-subdir('data')
-
-<<APP-COMMAND-C-NAME>>_dependencies = [
-  gtk,
-  libadwaita
-]
+conf.set_quoted('DATADIR', get_option('prefix') / get_option('datadir'))
+conf.set_quoted('GNOMELOCALEDIR', get_option('prefix') / get_option('localedir'))
 
 configure_file(output: 'config.h', configuration: conf)
 config_h_dir = include_directories('.')
 
+subdir('data')
 subdir('po')
 subdir('src')
-subdir('tests')
 
 gnome.post_install(
   glib_compile_schemas: true,

@@ -16,34 +16,18 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public sealed class <<APP-NAMESPACE>>.Application: Adw.Application {
-
-    const ActionEntry[] ACTION_ENTRIES = {
-        { "quit", quit },
-    };
-
-    public Application () {
-        Object (
-            application_id: Config.APP_ID_DYN,
-            resource_base_path: "<<RESOURCES-PATH>>"
-        );
-    }
-
-    construct {
-        add_action_entries (ACTION_ENTRIES, this);
-        set_accels_for_action ("app.quit", { "<primary>q" });
-    }
-
-    public override void activate () {
-        base.activate ();
-
-        if (active_window == null) {
-            var win = new Window (this);
-
-            win.present ();
-
-        } else {
-            active_window.present ();
-        }
+namespace <<APP-NAMESPACE>> {
+    public Adw.AboutDialog build_about () {
+        return new Adw.AboutDialog () {
+            application_name = "<<APP-NAME>>",
+            application_icon = Config.APP_ID_DYN,
+            developer_name = "<<DEVELOPER-USERNAME>>",
+            version = Config.VERSION,
+            // Translators: NAME <EMAIL.COM> /n NAME <EMAIL.COM>
+            translator_credits = _("translator-credits"),
+            license_type = Gtk.License.GPL_3_0,
+            copyright = "© 2024 <<DEVELOPER-USERNAME>>",
+            release_notes_version = Config.VERSION
+        };
     }
 }
