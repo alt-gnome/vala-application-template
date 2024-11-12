@@ -50,3 +50,4 @@ find ./ -type f -exec sed -i "s/<<APP-NAMESPACE>>/$APP_NAMESPACE/g" {} +
 find . -depth -name '*<<APP-ID>>*' -exec bash -c 'mv "$1" "${1//<<APP-ID>>/$2}"' _ {} "$APP_ID" \;
 
 rm ./setup-space.sh
+rm ./test-template.sh
