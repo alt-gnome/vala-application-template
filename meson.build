@@ -9,12 +9,12 @@ project(
 i18n = import('i18n')
 gnome = import('gnome')
 
-gtk = dependency('gtk4', version: '>= 4.16')
-libadwaita = dependency('libadwaita-1', version: '>= 1.6')
+gtk_dep = dependency('gtk4', version: '>= 4.16')
+libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
 
 dependencies = [
-  gtk,
-  libadwaita
+  gtk_dep,
+  libadwaita_dep
 ]
 
 add_project_arguments(
