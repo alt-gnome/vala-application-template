@@ -6,14 +6,14 @@ project(
   license: 'GPL-3.0-or-later',
 )
 
+glib_min_version = '2.76'
+
 i18n = import('i18n')
 gnome = import('gnome')
 
-gtk_dep = dependency('gtk4', version: '>= 4.16')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
 
 dependencies = [
-  gtk_dep,
   libadwaita_dep
 ]
 
@@ -23,7 +23,7 @@ add_project_arguments(
 )
 
 add_project_arguments(
-  '--target-glib', '2.76',
+  '--target-glib', glib_min_version,
   '--vapidir', meson.current_source_dir(),
   language: ['vala']
 )
