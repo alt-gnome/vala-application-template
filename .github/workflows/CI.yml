@@ -32,7 +32,7 @@ jobs:
     # needs: lint
 
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-46
+      image: bilelmoussaoui/flatpak-github-actions:master
       options: --privileged
 
     steps:

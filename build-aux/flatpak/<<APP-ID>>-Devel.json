@@ -1,7 +1,7 @@
 {
     "id" : "<<APP-ID>>-Devel",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "47",
+    "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "command" : "<<APP-COMMAND>>",
     "finish-args" : [
