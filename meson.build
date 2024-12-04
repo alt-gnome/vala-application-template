@@ -6,10 +6,17 @@ project(
   license: 'GPL-3.0-or-later',
 )
 
-glib_min_version = '2.76'
+app_name = '<<APP-NAME>>'
 
-i18n = import('i18n')
-gnome = import('gnome')
+app_id = '<<APP-ID>>'
+app_id_dyn = app_id
+
+c_name = '<<APP-COMMAND-C-NAME>>'
+
+developer_name = '<<DEVELOPER-NAME>>'
+developer_data = '<<DEVELOPER-DATA>>'
+
+glib_min_version = '2.76'
 
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6')
 
@@ -28,19 +35,20 @@ add_project_arguments(
   language: ['vala']
 )
 
-app_id = '<<APP-ID>>'
+i18n = import('i18n')
+gnome = import('gnome')
 
 if get_option('is_devel')
-  name_postfix = ' (Development)'
-  app_id_dyn = app_id + '-Devel'
-else
-  name_postfix = ''
-  app_id_dyn = app_id
+  app_name += ' (Devel)'
+  app_id_dyn += '-Devel'
 endif
 
 conf = configuration_data()
+conf.set_quoted('APP_NAME', app_name)
 conf.set_quoted('APP_ID', app_id)
 conf.set_quoted('APP_ID_DYN', app_id_dyn)
+conf.set_quoted('DEVELOPER_NAME', developer_name)
+conf.set_quoted('DEVELOPER_DATA', developer_data)
 conf.set_quoted('G_LOG_DOMAIN', app_id)
 conf.set10('IS_DEVEL', get_option('is_devel'))
 conf.set_quoted('VERSION', meson.project_version())

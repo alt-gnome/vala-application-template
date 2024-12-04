@@ -8,6 +8,8 @@ on:
 
 env:
   APP_ID: com.example.SuperDev2007.SomeApp
+  DEVELOPER_NAME: SuperDev2007
+  DEVELOPER_EMAIL: <super.dev-2007@master.dev>
 
 jobs:
   # lint:
@@ -38,7 +40,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Replace patterns
-      run: sh setup-space.sh ${{ env.APP_ID }}
+      run: sh setup-space.sh ${{ env.APP_ID }} 
 
     - name: Run tests and lint
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6

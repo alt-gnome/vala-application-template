@@ -2,9 +2,12 @@
 
 HELP="
 Using:
-    $ sh setup-space.sh [APP-ID] [DEVELOPER-NAME]
+    $ sh setup-space.sh APP-ID [DEVELOPER-NAME] [DEVELOPER-LINK]
 
 Uses developer username as developer name if name is empty.
+
+DEVELOPER-LINK can be <email>
+
 You can write \"--help\" or \"-h\" to show this message.
 "
 
@@ -31,10 +34,16 @@ APP_COMMAND_C_NAME="$(echo $APP_COMMAND | sed 's/-/_/g')"
 DEVELOPER_ID="${elems[0]}.${elems[1]}.${elems[2]}"
 DEVELOPER_USERNAME="${elems[-2]}"
 
-if [ $# -eq 2 ]; then
+if [ $# -ge 2 ]; then
     DEVELOPER_NAME="$2"
 else
 	DEVELOPER_NAME="$DEVELOPER_USERNAME"
+fi
+
+if [ $# -ge 3 ]; then
+    DEVELOPER_DATA="$DEVELOPER_NAME $3"
+else
+	DEVELOPER_DATA="$DEVELOPER_NAME"
 fi
 
 find ./ -type f -exec sed -i "s/<<APP-ID>>/$APP_ID/g" {} +
@@ -45,6 +54,7 @@ find ./ -type f -exec sed -i "s/<<APP-COMMAND-C-NAME>>/$APP_COMMAND_C_NAME/g" {}
 find ./ -type f -exec sed -i "s/<<DEVELOPER-USERNAME>>/$DEVELOPER_USERNAME/g" {} +
 find ./ -type f -exec sed -i "s/<<DEVELOPER-ID>>/$DEVELOPER_ID/g" {} +
 find ./ -type f -exec sed -i "s/<<DEVELOPER-NAME>>/$DEVELOPER_NAME/g" {} +
+find ./ -type f -exec sed -i "s/<<DEVELOPER-DATA>>/$DEVELOPER_DATA/g" {} +
 find ./ -type f -exec sed -i "s/<<APP-NAMESPACE>>/$APP_NAMESPACE/g" {} +
 
 find . -depth -name '*<<APP-ID>>*' -exec bash -c 'mv "$1" "${1//<<APP-ID>>/$2}"' _ {} "$APP_ID" \;

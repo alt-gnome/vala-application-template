@@ -1,3 +1,8 @@
+blueprint_files = files(
+  'ui/help-overlay.blp',
+  'ui/window.blp',
+)
+
 desktop_file = i18n.merge_file(
   input: '@0@.desktop.in'.format(app_id_dyn),
   output: '@0@.desktop'.format(app_id_dyn),
@@ -37,20 +42,17 @@ if compile_schemas.found()
 endif
 
 blueprints = custom_target('blueprints',
-  input: files(
-    'ui/help-overlay.blp',
-    'ui/window.blp',
-  ),
+  input: blueprint_files,
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
 resource_files = files('@0@.gresource.xml'.format(app_id))
 resources = gnome.compile_resources(
-  '<<APP-COMMAND>>-resources',
+  meson.project_name() + '-resources',
   resource_files,
   dependencies: blueprints,
-  c_name: '<<APP-COMMAND-C-NAME>>'
+  c_name: c_name
 )
 
 subdir('icons')

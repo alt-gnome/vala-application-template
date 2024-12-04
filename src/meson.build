@@ -16,7 +16,7 @@ sources = [
 ]
 
 executable(
-  '<<APP-COMMAND>>',
+  meson.project_name(),
   sources,
   include_directories: config_h_dir,
   dependencies: dependencies,

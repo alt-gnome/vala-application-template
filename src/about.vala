@@ -1,4 +1,4 @@
-/* Copyright 2024 <<DEVELOPER-USERNAME>>
+/* Copyright 2024 <<DEVELOPER-DATA>>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,15 +18,20 @@
 
 namespace <<APP-NAMESPACE>> {
     public Adw.AboutDialog build_about () {
+        string[] developers = {
+            Config.DEVELOPER_DATA,
+        };
+
         return new Adw.AboutDialog () {
-            application_name = "<<APP-NAME>>",
+            application_name = Config.APP_NAME,
             application_icon = Config.APP_ID_DYN,
-            developer_name = "<<DEVELOPER-USERNAME>>",
+            developer_name = Config.DEVELOPER_NAME,
             version = Config.VERSION,
-            // Translators: NAME <EMAIL.COM> /n NAME <EMAIL.COM>
+            developers = developers,
+            // Translators: NAME <EMAIL.COM> or NAME SITE.ORG
             translator_credits = _("translator-credits"),
             license_type = Gtk.License.GPL_3_0,
-            copyright = "© 2024 <<DEVELOPER-USERNAME>>",
+            copyright = "© 2024 " + Config.DEVELOPER_NAME,
             release_notes_version = Config.VERSION
         };
     }
