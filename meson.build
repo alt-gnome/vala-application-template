@@ -11,8 +11,6 @@ app_name = '<<APP-NAME>>'
 app_id = '<<APP-ID>>'
 app_id_dyn = app_id
 
-c_name = '<<APP-COMMAND-C-NAME>>'
-
 developer_name = '<<DEVELOPER-NAME>>'
 developer_data = '<<DEVELOPER-DATA>>'
 

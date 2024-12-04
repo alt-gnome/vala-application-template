@@ -52,7 +52,7 @@ resources = gnome.compile_resources(
   meson.project_name() + '-resources',
   resource_files,
   dependencies: blueprints,
-  c_name: c_name
+  c_name: '<<APP-COMMAND-C-NAME>>'
 )
 
 subdir('icons')
