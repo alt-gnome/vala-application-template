@@ -38,7 +38,7 @@ gnome = import('gnome')
 
 if get_option('is_devel')
   app_name += ' (Devel)'
-  app_id_dyn += '-Devel'
+  app_id_dyn += '.Devel'
 endif
 
 conf = configuration_data()
